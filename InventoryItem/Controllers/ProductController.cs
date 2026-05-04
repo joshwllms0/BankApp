@@ -2,6 +2,7 @@
 using BankApp.Models;
 using BankApp.Data;
 
+// Product Management Controller
 namespace BankApp.Controllers
 {
     public class ProductController : Controller
