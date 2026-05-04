@@ -4,6 +4,7 @@ using BankApp.Data;
 
 namespace BankApp.Controllers
 {
+    // Book Management Controller
     public class BookController : Controller
     {
         private readonly AppDbContext _context;
