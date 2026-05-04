@@ -1,0 +1,17 @@
+﻿@using BankApp.Models
+@model Product
+
+<h1>Edit @Model.Name</h1>
+
+<form asp-action="Edit" asp-controller="Product" method="post">
+    <div asp-validation-summary="All"></div>
+    <input type="hidden" asp-for="ID" />
+    <span asp-validation-for="ID"></span>
+    <input asp-for="Name" />
+    <span asp-validation-for="Name"></span>
+    <input asp-for="Price" />
+    <span asp-validation-for="Price"></span>
+    <input asp-for="Quantity" />
+    <span asp-validation-for="Quantity"></span>
+    <button type="submit">Submit</button>
+</form>

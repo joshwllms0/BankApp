@@ -1,0 +1,18 @@
+﻿@using BankApp.Models 
+@model List<Customer>
+
+    <h1>Customer List</h1>
+
+@foreach (var customer in Model)
+{
+    <div>
+    <p>@customer.CustomerID</p>
+    <p>@customer.FirstName</p>
+    <p>@customer.LastName</p>
+    <p>@customer.Email</p>
+    </div>
+
+    <a asp-controller="Customer" asp-action="Details" asp-route-id="@customer.CustomerID">View</a>
+    <a asp-controller="Customer" asp-action="Edit" asp-route-id="@customer.CustomerID">Edit</a>
+    <a asp-controller="Customer" asp-action="Delete" asp-route-id="@customer.CustomerID">Delete</a>
+}

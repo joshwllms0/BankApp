@@ -1,0 +1,19 @@
+﻿@using BankApp.Models 
+@model Product
+
+<h1>New Product</h1>
+<div>
+    <form asp-action="Create" method="post">
+        <div asp-validation-summary="All"></div>
+        <p>Name</p>
+     <input asp-for="Name" />
+     <span asp-validation-for="Name"></span>
+     <p>Price</p>
+     <input asp-for="Price" />
+     <span asp-validation-for="Price"></span>
+     <p>Quantity</p>
+     <input asp-for="Quantity" />
+     <span asp-validation-for="Quantity"></span>
+     <button type="submit">Submit</button>
+    </form>
+</div>

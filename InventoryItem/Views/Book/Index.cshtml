@@ -1,0 +1,16 @@
+﻿@using BankApp.Models 
+@model List<Book>
+
+    <h1>Book List</h1>
+
+@foreach(var b in Model)
+{
+    <p>@b.ID</p>
+    <p>@b.Title</p>
+    <p>@b.Author</p>
+    <p>@b.Price</p>
+
+    <a asp-controller="Book" asp-action="Details" asp-route-id="@b.ID">View</a>
+    <a asp-controller="Book" asp-action="Edit" asp-route-id="@b.ID">Edit</a>
+    <a asp-controller="Book" asp-action="Delete" asp-route-id="@b.ID">Delete</a>
+}

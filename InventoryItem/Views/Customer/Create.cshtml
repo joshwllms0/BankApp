@@ -1,0 +1,20 @@
+﻿@using BankApp.Models 
+@model Customer
+
+<h1>New Customer</h1>
+
+<div>
+    <form asp-action="Create" method="post">
+        <div asp-validation-summary="All"></div>
+        <p>First Name</p>
+        <input asp-for="FirstName" />
+        <span asp-validation-for="FirstName"></span>
+        <p>Last Name</p>
+        <input asp-for="LastName" />
+        <span asp-validation-for="LastName"></span>
+        <p>Email</p>
+        <input placeholder="Optional" asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+        <button type="submit">Submit</button>
+    </form>
+</div>

@@ -1,0 +1,16 @@
+﻿@using BankApp.Models
+@model Customer
+
+<h1>Edit Customer</h1>
+
+<form asp-controller="Customer" asp-action="Edit" method="post">
+    <div asp-validation-summary="All"></div>
+    <input type="hidden" asp-for="CustomerID" />
+    <input asp-for="FirstName" />
+    <span asp-validation-for="FirstName"></span>
+    <input asp-for="LastName" />
+    <span asp-validation-for="LastName"></span>
+    <input asp-for="Email">
+    <span asp-validation-for="Email"></span>
+    <button type="submit">Submit</button>
+</form>

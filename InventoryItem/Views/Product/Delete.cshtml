@@ -1,0 +1,17 @@
+﻿@using BankApp.Models
+@model Product
+
+<h1>Delete Product</h1>
+<form asp-controller="Product" asp-action="Delete" method="post">
+<div>
+<input type="hidden" asp-for="ID" />
+<p>@Model.Name</p>
+<p>@Model.Price</p>
+<p>@Model.Quantity</p>
+<span>
+</span>
+<p>Are you sure you want to delete this product?</p>
+<button type="submit">Yes</button>
+<a asp-controller="Product" asp-action="Index">No</a>
+</div>
+</form>
