@@ -2,6 +2,7 @@
 using BankApp.Models;
 using BankApp.Data;
 
+// Customer Management Controller
 namespace BankApp.Controllers
 {
     public class CustomerController : Controller
