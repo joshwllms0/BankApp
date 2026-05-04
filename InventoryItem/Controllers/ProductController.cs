@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BankApp.Models;
 using BankApp.Data;
+using Microsoft.EntityFrameworkCore;
 
 // Product Management Controller
 namespace BankApp.Controllers
@@ -14,14 +15,14 @@ namespace BankApp.Controllers
             _context = context; 
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_context.Products.ToList());
+            return View(await _context.Products.ToListAsync());
         }
-
-        public IActionResult Details(int id)
+        
+        public async Task<IActionResult> Details(int id)
         {
-            var productSelection = _context.Products.Find(id);
+            var productSelection = await _context.Products.FindAsync(id);
             if (productSelection == null)
             {
                 Console.WriteLine("Product ID not found.");
@@ -37,21 +38,21 @@ namespace BankApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Product product)
+        public async Task<IActionResult> Create(Product product)
         {
             if (ModelState.IsValid)
             {
                 _context.Products.Add(product);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(product);
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var result = _context.Products.Find(id);
+            var result = await _context.Products.FindAsync(id);
             if (result == null)
             {
                 Console.WriteLine("ID not found.");
@@ -61,21 +62,21 @@ namespace BankApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Product product)
+        public async Task<IActionResult> Edit(Product product)
         {
             if (ModelState.IsValid)
             {
                 _context.Update(product);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(product);
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var result = _context.Products.Find(id);
+            var result = await _context.Products.FindAsync(id);
             if (result == null)
             {
                 Console.WriteLine($"Product {id} not found");
@@ -85,16 +86,16 @@ namespace BankApp.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmation(int id)
+        public async Task<IActionResult> DeleteConfirmation(int id)
         {
-            var result = _context.Products.Find(id);
+            var result = await _context.Products.FindAsync(id);
             if (result == null) 
             {
                 Console.WriteLine("ID not found");
                 return RedirectToAction("Index");
             }
             _context.Products.Remove(result);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BankApp.Models;
 using BankApp.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace BankApp.Controllers
 {
@@ -13,14 +14,14 @@ namespace BankApp.Controllers
             _context = context; 
         }
         
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_context.Books.ToList());
+            return View(await _context.Books.ToListAsync());
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var bookid = _context.Books.Find(id);
+            var bookid = await _context.Books.FindAsync(id);
             if (bookid == null)
             {
                 Console.WriteLine("BookID does not exist.");
@@ -36,21 +37,21 @@ namespace BankApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Book book)
+        public async Task<IActionResult> Create(Book book)
         {
             if (ModelState.IsValid)
             {
                 _context.Books.Add(book);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(book);
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var result = _context.Books.Find(id);
+            var result = await _context.Books.FindAsync(id);
             if (result == null)
             {
                 Console.WriteLine("Book ID not found");
@@ -60,21 +61,21 @@ namespace BankApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Book book)
+        public async Task<IActionResult> Edit(Book book)
         {
             if (ModelState.IsValid)
             {
                 _context.Books.Update(book);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(book);
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var result = _context.Books.Find(id);
+            var result = await _context.Books.FindAsync(id);
             if (result == null)
             {
                 Console.WriteLine("Book ID not found");
@@ -84,16 +85,16 @@ namespace BankApp.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmation(int id)
+        public async Task<IActionResult> DeleteConfirmation(int id)
         {
-            var result = _context.Books.Find(id);
+            var result = await _context.Books.FindAsync(id);
             if (result == null)
             {
                 Console.WriteLine("Book ID not found");
                 return RedirectToAction("Index");
             }
             _context.Books.Remove(result);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
     }
